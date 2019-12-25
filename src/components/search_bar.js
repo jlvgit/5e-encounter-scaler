@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SearchBar extends Component {
-
-    render(){
-        console.log(this.props.keywords)
+const SearchBar = (props) => {
         return(
-            <form className="col s12">
+            <form>
                 <div className="row">
-                    <div className="input-field col s6">
-                    <i className="material-icons prefix">search</i>
-                    <input id="icon_prefix" type="text" className="validate"/>
-                    <label htmlFor="icon_prefix">Search</label>
+                    <div className="input-field col s12">
+                        <i className="material-icons prefix">search</i>
+                        <input id="icon_prefix" type="text" className="validate" onChange={props.keywords}/>
+                        <label htmlFor="icon_prefix">Search</label>
                     </div>
                 </div>
             </form>
         )
-    }
 }
 
 export default SearchBar;

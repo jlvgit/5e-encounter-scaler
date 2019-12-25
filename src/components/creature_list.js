@@ -3,14 +3,6 @@ import React from 'react';
 //COMPONENTS
 import Creature from './creature'
 
-// inputChangeHandler = (event) => {
-//     console.log(event.target.value)
-//     this.setState({
-//         keywords: event.target.value
-//     })
-// }
-
-
 const CreatureList = (props) => {
 
         const creatures = props.list.map((creature) => {
@@ -21,7 +13,6 @@ const CreatureList = (props) => {
 
         return(
             <div className="row">
-                <div className="input-field col s6">
                     <table className='list'>
                         <thead>
                             <tr>
@@ -34,7 +25,6 @@ const CreatureList = (props) => {
                             {creatures}
                         </tbody>
                     </table>
-                </div>
             </div>
         )
     } 

@@ -7,8 +7,12 @@
     margin: 0 3px;
 }
 
+td {
+    padding: 5px 5px;
+}
 
-/* Materialize styes for search box*/
+
+/* Materialize styles for search box*/
     /* label color */
     .input-field label {
         color: #000;
