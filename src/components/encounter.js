@@ -8,7 +8,7 @@ class Encounter extends Component {
 
         render() {
             const encounterCreatures = this.props.encounter.map( (creature) => {
-                return <div key={creature.name}>{creature.name} - CR {creature.CR}</div>
+                return <div key={creature.name}>{creature.name} x {creature.count}</div>
             });
 
             return(

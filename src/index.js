@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import JSON from './creatures.json'
-import M from 'materialize-css';
 import './index.css';
 
 //COMPONENTS
@@ -45,15 +44,21 @@ class App extends Component {
     }
 
     addToEncounter = (newEntry) => {
+        this.setState({ encounterList: [...this.state.encounterList, newEntry] })
         if (this.state.encounterList.indexOf(newEntry) === -1) {
             this.setState({ encounterList: [...this.state.encounterList, newEntry] })
         } else {
-            M.toast({html: 'Already exists in Encounter!', displayLength: 500})
+            this.setState({ encounterList: this.state.encounterList })
         }
     }
 
     removeFromEncounter = (newEntry) => {
-        let filteredArray = this.state.encounterList.filter(item => item !== newEntry)
+        let filteredArray;
+        if (newEntry.count === 0){
+            filteredArray = this.state.encounterList.filter(item => item !== newEntry)
+        } else {
+            filteredArray = this.state.encounterList
+        }
         this.setState({encounterList: filteredArray});
     }
 
