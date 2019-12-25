@@ -7,7 +7,7 @@ const CreatureList = (props) => {
 
         const creatures = props.list.map((creature) => {
             return (
-                <Creature key={creature.name} creature={creature}/>
+                <Creature key={creature.name} creature={creature} add={props.add} remove={props.remove}/>
             )
         });
 
