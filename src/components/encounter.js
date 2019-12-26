@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 //COMPONENTS
 import PartyMembers from './party_members'
-import { create } from 'domain';
 
 class Encounter extends Component {
+
+        state = {
+            monsters: this.state.encounter,
+            players: 0,
+            playerLevel: 1
+        }
 
         render() {
             const encounterCreatures = this.props.encounter.map( (creature) => {

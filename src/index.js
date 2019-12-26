@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import JSON from './creatures.json'
+import JSON from './data/creatures.json'
 import './index.css';
 
 //COMPONENTS
