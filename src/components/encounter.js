@@ -16,12 +16,19 @@ class Encounter extends Component {
                     <PartyMembers 
                         setPlayers={this.props.setPlayers} 
                         setPlayerLevel={this.props.setPlayerLevel}/>
-                    <h5>Encounter</h5>
-                    {encounterCreatures}
-                    <EncounterXP 
-                        monsters={[this.props.encounter]} 
-                        players={this.props.players}
-                        playerLevel={this.props.playerLevel}/>
+                    <div className='encounter-title'>
+                        <h5>Encounter</h5>
+                        <span className="btn-flat" onClick={this.props.clearEncounter}>Clear</span>
+                    </div>
+                    <div className='col s6'>
+                        {encounterCreatures}    
+                    </div>
+                    <div className='col s6'>
+                        <EncounterXP 
+                            monsters={[this.props.encounter]} 
+                            players={this.props.players}
+                            playerLevel={this.props.playerLevel}/>
+                    </div>
                 </div>
         )
     }

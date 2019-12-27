@@ -1,55 +1,57 @@
 import React, { Component } from 'react';
-import STATS from '../data/stats_by_cr.json'
 
 class EncounterXP extends Component {
 
-        componentDidUpdate(){
-            // console.log(this.getXpTotalForEncounter())
-        }
-
-        findStats = (crToFind) => {
-            let obj = STATS.find(data => data.CR === crToFind);
-            return obj
-        }
-
         getXpTotalForCreature = (creature) => {
-            let statsForCreature = this.findStats(creature.CR);
-            let xp = statsForCreature.XP * creature.count
+            let xp = creature.stats.XP * creature.count
             return xp
         }
 
-        getXpMultiplier = (count) => {
-            if (count === 2) {
-                return 1.5
-            } else if (count >= 3 && count <= 6 ){
-                return 2
-            } else if (count >= 7 && count <= 10 ) {
-                return 2.5
-            } else if (count >= 11 && count <= 14 ) {
-                return 3
-            } else if (count >= 15 ) {
-                return 4
+        getXpMultiplier = (enemyCount, playerCount) => {
+            const multipliers = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5]
+            let multiplierIndex = 1
+
+            if (enemyCount === 2) {
+                multiplierIndex = 2
+            } else if (enemyCount >= 3 && enemyCount <= 6 ){
+                multiplierIndex = 3
+            } else if (enemyCount >= 7 && enemyCount <= 10 ) {
+                multiplierIndex = 4
+            } else if (enemyCount >= 11 && enemyCount <= 14 ) {
+                multiplierIndex = 5
+            } else if (enemyCount >= 15 ) {
+                multiplierIndex = 6
             } else {
-                return 1
+                multiplierIndex = 1
             }
+
+            if (playerCount < 3) {
+                multiplierIndex += 1
+            } else if (playerCount > 5 && enemyCount === 1) {
+                multiplierIndex = 0
+            } else if (playerCount > 5 && multiplierIndex > 1) {
+                multiplierIndex -= 1
+            } 
+
+            return multipliers[multiplierIndex]
         }
 
-        getXpTotalForEncounter = () => {
-            const monsters = this.props.monsters[0]
+        getXpTotalForEncounter = (monsters, players) => {
             let xpTotal = 0
             let countTotal = 0
             monsters.forEach(creature => {
                 countTotal = countTotal + creature.count
                 xpTotal    = xpTotal + this.getXpTotalForCreature(creature)
             });
-            xpTotal = xpTotal * this.getXpMultiplier(countTotal)
+            xpTotal = xpTotal * this.getXpMultiplier(countTotal, players)
             return xpTotal
         }
 
         render(){
             return(
                 <div>
-                    Encounter XP: {this.getXpTotalForEncounter()}
+                    <div>Encounter XP for 4 players: {this.getXpTotalForEncounter(this.props.monsters[0], 4)}</div>
+                    <div>Encounter XP for {this.props.players} players: {this.getXpTotalForEncounter(this.props.monsters[0], this.props.players)}</div>
                 </div>
             )
         }

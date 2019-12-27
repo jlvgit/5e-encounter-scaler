@@ -11,6 +11,12 @@ td {
     padding: 5px 5px;
 }
 
+.encounter-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
 
 /* Materialize styles for search box*/
     /* label color */

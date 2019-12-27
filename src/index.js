@@ -66,6 +66,7 @@ class App extends Component {
 
     setPlayers     = (event) => { this.setState({players:event.target.value}) }
     setPlayerLevel = (event) => { this.setState({playerLevel:event.target.value}) }
+    clearEncounter = () => { this.setState({encounterList: []})}
 
     render() {
         return(
@@ -82,6 +83,7 @@ class App extends Component {
                     <div className="col s6">
                         <Encounter 
                             encounter      = {this.state.encounterList} 
+                            clearEncounter = {this.clearEncounter}
                             setPlayers     = {this.setPlayers} 
                             setPlayerLevel = {this.setPlayerLevel}
                             players        = {this.state.players}
