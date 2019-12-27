@@ -15,7 +15,9 @@ class App extends Component {
         searchTerm: '',
         monsterList: JSON,
         filtered: [],
-        encounterList: []
+        encounterList: [],
+        players: 1,
+        playerLevel: 1
     }
 
     getFilteredResultsByKeyword = (event) => {
@@ -62,20 +64,28 @@ class App extends Component {
         this.setState({encounterList: filteredArray});
     }
 
+    setPlayers     = (event) => { this.setState({players:event.target.value}) }
+    setPlayerLevel = (event) => { this.setState({playerLevel:event.target.value}) }
+
     render() {
         return(
                 <div className="row">
                     <div className="col s6">
                         <SearchBar keywords={this.getFilteredResultsByKeyword}/>
                         <CreatureList 
-                            list={this.showFilterResults(this.state.filtered)}
-                            encounter={this.state.encounterList} 
-                            add={this.addToEncounter}
-                            remove={this.removeFromEncounter}
+                            list      = {this.showFilterResults(this.state.filtered)}
+                            encounter = {this.state.encounterList} 
+                            add       = {this.addToEncounter}
+                            remove    = {this.removeFromEncounter}
                         />
                     </div>
                     <div className="col s6">
-                        <Encounter encounter={this.state.encounterList}/>
+                        <Encounter 
+                            encounter      = {this.state.encounterList} 
+                            setPlayers     = {this.setPlayers} 
+                            setPlayerLevel = {this.setPlayerLevel}
+                            players        = {this.state.players}
+                            playerLevel    = {this.state.playerLevel}/>
                     </div>
                 </div>
         )

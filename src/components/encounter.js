@@ -6,16 +6,6 @@ import EncounterXP from './encounter_xp';
 
 class Encounter extends Component {
 
-        state = {
-            monsters: this.props.encounter,
-            players: 1,
-            playerLevel: 1
-        }
-
-        setPlayers     = (event) => { this.setState({players:event.target.value}) }
-        setPlayerLevel = (event) => { this.setState({playerLevel:event.target.value}) }
-
-
         render() {
             const encounterCreatures = this.props.encounter.map( (creature) => {
                 return <div key={creature.name}>{creature.name} x {creature.count}</div>
@@ -23,9 +13,15 @@ class Encounter extends Component {
 
             return(
                 <div className='encounter'>
-                    <PartyMembers setPlayers={this.setPlayers}/>
+                    <PartyMembers 
+                        setPlayers={this.props.setPlayers} 
+                        setPlayerLevel={this.props.setPlayerLevel}/>
                     <h5>Encounter</h5>
                     {encounterCreatures}
+                    <EncounterXP 
+                        monsters={[this.props.encounter]} 
+                        players={this.props.players}
+                        playerLevel={this.props.playerLevel}/>
                 </div>
         )
     }

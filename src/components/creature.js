@@ -16,7 +16,9 @@ const Creature = (props) => {
                 </button>
 
                 <button className="subtract-button waves-effect waves-light btn-small blue-grey" onClick={() => {
-                        props.creature.count -= 1;
+                        if (props.creature.count > 0){
+                            props.creature.count -= 1;
+                        }
                         props.remove(props.creature)
                     }}
                     >-
