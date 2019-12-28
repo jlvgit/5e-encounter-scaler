@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+//COMPONENTS
+import EncounterDifficulty from './difficulty'
+
 class EncounterXP extends Component {
 
         getXpTotalForCreature = (creature) => {
@@ -48,10 +51,17 @@ class EncounterXP extends Component {
         }
 
         render(){
+            let encounterXP = this.getXpTotalForEncounter(this.props.monsters[0], this.props.players)
+            let fourPlayerEncounterXP = this.getXpTotalForEncounter(this.props.monsters[0], 4)
+        
             return(
                 <div>
-                    <div>Encounter XP for 4 players: {this.getXpTotalForEncounter(this.props.monsters[0], 4)}</div>
-                    <div>Encounter XP for {this.props.players} players: {this.getXpTotalForEncounter(this.props.monsters[0], this.props.players)}</div>
+                    <div><strong>Player Level: {this.props.playerLevel}</strong></div>
+                    <div>Encounter XP for 4 players: {fourPlayerEncounterXP}</div>
+                    <EncounterDifficulty playerLevel={this.props.playerLevel} players={4} encounterXP={fourPlayerEncounterXP}/>
+                    <hr></hr>
+                    <div>Encounter XP for {this.props.players} players: {encounterXP}</div>
+                    <EncounterDifficulty playerLevel={this.props.playerLevel} players={this.props.players} encounterXP={encounterXP}/>
                 </div>
             )
         }
