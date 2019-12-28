@@ -21,10 +21,10 @@ const EncounterDifficulty = (props) => {
                 return "Medium"
             } else if (encounterXP >= hard && encounterXP < deadly) {
                 return "Hard"
-            } else if (encounterXP >= deadly && encounterXP < deadly*3) {
+            } else if (encounterXP >= deadly && encounterXP < deadly * 2) {
                 return "Deadly"
-            } else if (encounterXP >= deadly * 3) {
-                return "More than 3x Deadly"
+            } else if (encounterXP >= deadly * 2) {
+                return `${Math.round( encounterXP/deadly * 10 ) / 10}x more than Deadly`
             }
         }
 

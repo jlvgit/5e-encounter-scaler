@@ -67,13 +67,13 @@ class App extends Component {
     clearEncounter = () => { this.setState({encounterList: []})}
 
     setPlayers = (event) => {
-        if (event.target.value >=1 && event.target.value < 10) {
+        if (event.target.value >= 1 && event.target.value < 10) {
             this.setState({players:event.target.value}) 
         }
     }
 
     setPlayerLevel = (event) => {
-         if (event.target.value >=1 && event.target.value < 20) {
+         if (event.target.value >= 1 && event.target.value < 20) {
              this.setState({playerLevel:event.target.value}) 
         }
     }
