@@ -64,9 +64,19 @@ class App extends Component {
         this.setState({encounterList: filteredArray});
     }
 
-    setPlayers     = (event) => { this.setState({players:event.target.value}) }
-    setPlayerLevel = (event) => { this.setState({playerLevel:event.target.value}) }
     clearEncounter = () => { this.setState({encounterList: []})}
+
+    setPlayers = (event) => {
+        if (event.target.value >=1 && event.target.value < 10) {
+            this.setState({players:event.target.value}) 
+        }
+    }
+
+    setPlayerLevel = (event) => {
+         if (event.target.value >=1 && event.target.value < 20) {
+             this.setState({playerLevel:event.target.value}) 
+        }
+    }
 
     render() {
         return(

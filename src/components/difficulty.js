@@ -12,7 +12,7 @@ const EncounterDifficulty = (props) => {
         const hard   = threshold.Hard   * props.players
         const deadly = threshold.Deadly * props.players
 
-        const getDifficultyByPlayerLevel = (encounterXP) => {
+        const getDifficulty = (encounterXP) => {
             if (encounterXP < easy && encounterXP > 0) {
                 return "Trivial"
             } else if (encounterXP >= easy && encounterXP < medium) {
@@ -29,7 +29,7 @@ const EncounterDifficulty = (props) => {
         }
 
         return(
-                <div>Difficulty for {props.players} players: {getDifficultyByPlayerLevel(props.encounterXP)}</div>
+                <div>Difficulty for {props.players} players: {getDifficulty(props.encounterXP)}</div>
             )
 }
 
