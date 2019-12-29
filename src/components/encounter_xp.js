@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 //COMPONENTS
 import EncounterDifficulty from './difficulty'
+import EnemyCountScaler from './enemy_count_scaler'
 
 class EncounterXP extends Component {
 
@@ -58,10 +59,21 @@ class EncounterXP extends Component {
                 <div>
                     <div><strong>Player Level: {this.props.playerLevel}</strong></div>
                     <div>Encounter XP for 4 players: {fourPlayerEncounterXP}</div>
-                    <EncounterDifficulty playerLevel={this.props.playerLevel} players={4} encounterXP={fourPlayerEncounterXP}/>
+                    <EncounterDifficulty 
+                        playerLevel={this.props.playerLevel}  
+                        encounterXP={fourPlayerEncounterXP}
+                        players={4}/>
                     <hr></hr>
                     <div>Encounter XP for {this.props.players} players: {encounterXP}</div>
-                    <EncounterDifficulty playerLevel={this.props.playerLevel} players={this.props.players} encounterXP={encounterXP}/>
+                    <EncounterDifficulty 
+                        playerLevel={this.props.playerLevel}
+                        encounterXP={encounterXP}
+                        players={this.props.players}/>
+                    <h5>Adjustment Options</h5>
+                    <EnemyCountScaler 
+                        getXP={this.getXpTotalForEncounter} 
+                        monsters={this.props.monsters[0]}
+                        players={this.props.players}/>
                 </div>
             )
         }

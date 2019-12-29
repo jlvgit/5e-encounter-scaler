@@ -64,7 +64,12 @@ class App extends Component {
         this.setState({encounterList: filteredArray});
     }
 
-    clearEncounter = () => { this.setState({encounterList: []})}
+    clearEncounter = () => { 
+        this.state.encounterList.forEach((creature) => {
+            delete creature.count
+        })
+        this.setState({encounterList: []})
+    }
 
     setPlayers = (event) => {
         if (event.target.value >= 1 && event.target.value < 10) {
