@@ -17,6 +17,10 @@ td {
     align-items: baseline;
 }
 
+p.range-field {
+    margin: 0;
+}
+
 
 /* Materialize styles for search box*/
     /* label color */

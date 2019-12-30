@@ -1,5 +1,7 @@
 import React from 'react'
 import STATS from '../data/stats_by_cr.json'
+import { Button } from 'react-materialize';
+
 
 const Creature = (props) => {
 
@@ -14,23 +16,21 @@ const Creature = (props) => {
             <td>{props.creature.CR}</td>
             <td>{props.creature.creature_size}</td>
             <td>
-                <button className="add-button waves-effect waves-light btn-small blue-grey" onClick={() => {
+                <Button className="add-button blue-grey" waves='light' small={true} onClick={() => {
                         props.creature.count = props.creature.count || 0 ;
                         props.creature.count += 1;
                         props.creature.stats = creatureStats(props.creature.CR)
                         props.add(props.creature);
                     }}
-                    >+
-                </button>
+                >+</Button>
 
-                <button className="subtract-button waves-effect waves-light btn-small blue-grey" onClick={() => {
+                <Button className="subtract-button blue-grey" waves='light' small={true} onClick={() => {
                         if (props.creature.count > 0){
                             props.creature.count -= 1;
                         }
                         props.remove(props.creature)
                     }}
-                    >-
-                </button>
+                >-</Button>
             </td>
         </tr>
     )
