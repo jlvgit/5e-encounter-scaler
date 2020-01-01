@@ -76,9 +76,11 @@ class EncounterXP extends Component {
                 difficulty = `${Math.round( encounterXP/deadly * 10 ) / 10}x more than Deadly`
             }
 
-            return(
-                difficulty
-            )
+            if (encounterXP === 0) {
+                return ''
+            } else {
+                return difficulty
+            }
         }
 
         render(){

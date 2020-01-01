@@ -8,20 +8,23 @@ class EnemyCountScaler extends Component {
         }
     
         calculateNewXp = (event, creature) => {
-            let list = this.props.monsters
-            const result = list.find( ({ name }) => name === creature.name );
-            const oldCount = result.count
-            result.count = parseInt(event.target.value)
-            this.setState({
-                calculatedXp: this.props.getXP(list, this.props.players)
-            })
-            result.count = oldCount
+            if (this.props.monsters.length > 0) {
+                let list = this.props.monsters
+                const result = list.find( ({ name }) => name === creature.name );
+                const oldCount = result.count
+                result.count = parseInt(event.target.value)
+                this.setState({
+                    calculatedXp: this.props.getXP(list, this.props.players)
+                })
+                result.count = oldCount
+            }
         }
 
         getEnemySliders = () => {
             let enemies = this.props.monsters.map((monster) => {
                 return (
                     <div key={monster.name}> 
+                        <label>{monster.name}</label>
                         <Range 
                             label={monster.name}
                             max="20" min="0" 
@@ -39,7 +42,7 @@ class EnemyCountScaler extends Component {
             return(
                 <div>
                     <strong>Add/Remove enemies</strong>
-                    <div>XP for {this.props.players} players: <span className='newxp'>{this.state.calculatedXp} {this.props.difficulty(this.state.calculatedXp)}</span></div>
+                    <div>XP for {this.props.players} players: <span className='newxp'>{this.props.monsters.length > 0 ? this.state.calculatedXp : ''} {this.props.difficulty(this.state.calculatedXp)}</span></div>
                     <div>{this.getEnemySliders()}</div>
                 </div>
             )
