@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
 
 //COMPONENTS
-import PartyMembers from './party_members'
 import EncounterXP from './encounter_xp';
+import { Collection, CollectionItem } from 'react-materialize';
 
 class Encounter extends Component {
 
         render() {
             const encounterCreatures = this.props.encounter.map( (creature) => {
-                return <div key={creature.name}>{creature.name} x {creature.count}</div>
+                return <CollectionItem key={creature.name}>{creature.name} x {creature.count}</CollectionItem>
             });
 
             return(
                 <div className='encounter'>
-                    <PartyMembers 
-                        setPlayers={this.props.setPlayers} 
-                        setPlayerLevel={this.props.setPlayerLevel}/>
                     <div className='encounter-title'>
                         <h5>Encounter</h5>
                         <span className="btn-flat" onClick={this.props.clearEncounter}>Clear</span>
                     </div>
-                    <div className='col s6'>
+                    <Collection>
                         {encounterCreatures}    
-                    </div>
-                    <div className='col s6'>
+                    </Collection>
+                    <div>
                         <EncounterXP 
                             monsters={[this.props.encounter]} 
                             players={this.props.players}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
+//Data needed
+import DIFFICULTY from '../data/difficulty_chart.json'
+
 //COMPONENTS
-import EncounterDifficulty from './difficulty'
 import EnemyCountScaler from './enemy_count_scaler'
 
 class EncounterXP extends Component {
@@ -51,6 +53,34 @@ class EncounterXP extends Component {
             return xpTotal
         }
 
+        getDifficulty = (encounterXP) => {
+            const threshold = DIFFICULTY[this.props.playerLevel]
+            let difficulty = ''
+
+            const easy   = threshold.Easy   * this.props.players
+            const medium = threshold.Medium * this.props.players
+            const hard   = threshold.Hard   * this.props.players
+            const deadly = threshold.Deadly * this.props.players
+    
+            if (encounterXP < easy && encounterXP > 0) {
+                difficulty = "Trivial"
+            } else if (encounterXP >= easy && encounterXP < medium) {
+                difficulty = "Easy"
+            } else if (encounterXP >= medium && encounterXP < hard) {
+                difficulty = "Medium"
+            } else if (encounterXP >= hard && encounterXP < deadly) {
+                difficulty = "Hard"
+            } else if (encounterXP >= deadly && encounterXP < deadly * 2) {
+                difficulty = "Deadly"
+            } else if (encounterXP >= deadly * 2) {
+                difficulty = `${Math.round( encounterXP/deadly * 10 ) / 10}x more than Deadly`
+            }
+
+            return(
+                difficulty
+            )
+        }
+
         render(){
             let encounterXP = this.getXpTotalForEncounter(this.props.monsters[0], this.props.players)
             let fourPlayerEncounterXP = this.getXpTotalForEncounter(this.props.monsters[0], 4)
@@ -58,22 +88,24 @@ class EncounterXP extends Component {
             return(
                 <div>
                     <div><strong>Player Level: {this.props.playerLevel}</strong></div>
-                    <div>Encounter XP for 4 players: {fourPlayerEncounterXP}</div>
-                    <EncounterDifficulty 
-                        playerLevel={this.props.playerLevel}  
-                        encounterXP={fourPlayerEncounterXP}
-                        players={4}/>
+
+                    <div className='col s6'>
+                        <div>Encounter XP for 4 players: {fourPlayerEncounterXP}</div>
+                        <div>Difficulty for 4 players: {this.getDifficulty(fourPlayerEncounterXP)}</div>
+                    </div>
+                    <div className='col s6'>
+                        <div>Encounter XP for {this.props.players} players: {encounterXP}</div>
+                        <div>Difficulty for {this.props.players} players: {this.getDifficulty(encounterXP)}</div>
+                    </div>                    
                     <hr></hr>
-                    <div>Encounter XP for {this.props.players} players: {encounterXP}</div>
-                    <EncounterDifficulty 
-                        playerLevel={this.props.playerLevel}
-                        encounterXP={encounterXP}
-                        players={this.props.players}/>
-                    <h5>Adjustment Options</h5>
-                    <EnemyCountScaler 
-                        getXP={this.getXpTotalForEncounter} 
-                        monsters={this.props.monsters[0]}
-                        players={this.props.players}/>
+                    <div>
+                        <h5 className='adjustment-title'>Adjustment Options</h5>
+                        <EnemyCountScaler 
+                            getXP={this.getXpTotalForEncounter} 
+                            difficulty={this.getDifficulty}
+                            monsters={this.props.monsters[0]}
+                            players={this.props.players}/>
+                    </div>
                 </div>
             )
         }

@@ -7,6 +7,7 @@ import './index.css';
 import CreatureList from './components/creature_list'
 import SearchBar from './components/search_bar'
 import Encounter from './components/encounter'
+import PartyMembers from './components/party_members'
 
 
 class App extends Component {
@@ -87,6 +88,9 @@ class App extends Component {
         return(
                 <div className="row">
                     <div className="col s6">
+                        <PartyMembers 
+                            setPlayers={this.setPlayers} 
+                            setPlayerLevel={this.setPlayerLevel}/>
                         <SearchBar keywords={this.getFilteredResultsByKeyword}/>
                         <CreatureList 
                             list      = {this.showFilterResults(this.state.filtered)}

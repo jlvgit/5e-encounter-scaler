@@ -21,6 +21,14 @@ p.range-field {
     margin: 0;
 }
 
+.newxp {
+    font-size: 1.3em;
+    color: red;
+}
+
+.adjustment-title {
+    padding-top: 50px;
+}
 
 /* Materialize styles for search box*/
     /* label color */

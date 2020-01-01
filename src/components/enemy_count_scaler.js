@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 import { Range } from 'react-materialize';
 
-import CountSlider from './enemy_count_range_slider'
-
 class EnemyCountScaler extends Component {
 
         state = {
-            calculatedXp: ''
+            calculatedXp: 0
         }
     
         calculateNewXp = (event, creature) => {
-            let oldCount = creature.count
-            creature.count = event.target.value
+            let list = this.props.monsters
+            const result = list.find( ({ name }) => name === creature.name );
+            const oldCount = result.count
+            result.count = parseInt(event.target.value)
             this.setState({
-                calculatedXp: this.props.getXP(this.props.monsters, this.props.players)
+                calculatedXp: this.props.getXP(list, this.props.players)
             })
-            creature.count = oldCount
+            result.count = oldCount
         }
 
         getEnemySliders = () => {
             let enemies = this.props.monsters.map((monster) => {
                 return (
-                    <div key={monster.name}>            
-                        <label>{monster.name}</label>
-                        <Range  max="20" min="0" name="enemies" defaultValue={monster.count+1} onChange={(e) => this.calculateNewXp(e, monster)}/>
+                    <div key={monster.name}> 
+                        <Range 
+                            label={monster.name}
+                            max="20" min="0" 
+                            name="enemies" 
+                            defaultValue="0"
+                            onChange={(e) => this.calculateNewXp(e, monster)}/>
                     </div>
                 )
             }) 
@@ -35,7 +39,7 @@ class EnemyCountScaler extends Component {
             return(
                 <div>
                     <strong>Add/Remove enemies</strong>
-                    <div>XP for {this.props.players} players: {this.state.calculatedXp}</div>
+                    <div>XP for {this.props.players} players: <span className='newxp'>{this.state.calculatedXp} {this.props.difficulty(this.state.calculatedXp)}</span></div>
                     <div>{this.getEnemySliders()}</div>
                 </div>
             )
